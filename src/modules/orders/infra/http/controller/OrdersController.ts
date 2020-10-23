@@ -27,6 +27,7 @@ export default class OrdersController {
       customer_id,
       products,
     });
+
     return response.json(customer);
   }
 }

@@ -23,8 +23,6 @@ class Product {
   @Column('int')
   quantity: number;
 
-  // um produto pode ter vários order_products
-  // um produto pode estar em vários pedidos
   @OneToMany(() => OrdersProducts, order_products => order_products.product)
   order_products: OrdersProducts[];
 

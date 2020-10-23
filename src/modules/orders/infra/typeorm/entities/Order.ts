@@ -16,15 +16,12 @@ class Order {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  // várias orders podem ter um customer (um cliente pode fazer vários pedidos)
   @ManyToOne(() => Customer)
-  @JoinColumn({ name: 'customer_id' }) // o campo customer_id fará o relacionamento com a tabela Customer
+  @JoinColumn({ name: 'customer_id' })
   customer: Customer;
 
-  // um pedido pode ter vários order_products
-  // um pedido pode ter vários produtos
   @OneToMany(() => OrdersProducts, order_products => order_products.order, {
-    cascade: true, // salva automaticamente os produtos na tabela 'orders_products'
+    cascade: true,
   })
   order_products: OrdersProducts[];
 

@@ -14,7 +14,7 @@ class OrdersRepository implements IOrdersRepository {
   public async create({ customer, products }: ICreateOrderDTO): Promise<Order> {
     const order = this.ormRepository.create({
       customer,
-      order_products: products, // salva automaticamente os produtos na tabela 'order_products' se 'cascade: true' (verificar entidade 'Order')
+      order_products: products,
     });
 
     await this.ormRepository.save(order);
@@ -24,8 +24,9 @@ class OrdersRepository implements IOrdersRepository {
 
   public async findById(id: string): Promise<Order | undefined> {
     const order = this.ormRepository.findOne(id, {
-      relations: ['order_products', 'customer'], // busca o pedido com os produtos e o cliente
+      relations: ['order_products', 'customer'],
     });
+
     return order;
   }
 }

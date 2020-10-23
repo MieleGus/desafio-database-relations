@@ -21,7 +21,7 @@ class ProductsRepository implements IProductsRepository {
     price,
     quantity,
   }: ICreateProductDTO): Promise<Product> {
-    const product = this.ormRepository.create({
+    const product = await this.ormRepository.create({
       name,
       price,
       quantity,
@@ -33,23 +33,24 @@ class ProductsRepository implements IProductsRepository {
   }
 
   public async findByName(name: string): Promise<Product | undefined> {
-    const findNameProduct = await this.ormRepository.findOne({
+    const product = await this.ormRepository.findOne({
       where: {
         name,
       },
     });
-    return findNameProduct;
+
+    return product;
   }
 
   public async findAllById(products: IFindProducts[]): Promise<Product[]> {
     const productIds = products.map(product => product.id);
 
-    // retorna apenas os ids que existirem no array productIds
     const existentProducts = await this.ormRepository.find({
       where: {
         id: In(productIds),
       },
     });
+
     return existentProducts;
   }
 
