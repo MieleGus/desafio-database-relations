@@ -1,7 +1,5 @@
 import { inject, injectable } from 'tsyringe';
 
-import IProductsRepository from '@modules/products/repositories/IProductsRepository';
-import ICustomersRepository from '@modules/customers/repositories/ICustomersRepository';
 import Order from '../infra/typeorm/entities/Order';
 import IOrdersRepository from '../repositories/IOrdersRepository';
 
@@ -13,7 +11,7 @@ interface IRequest {
 class FindOrderService {
   constructor(
     @inject('OrdersRepository')
-    private ordersRepository: IOrdersRepository, // @inject('ProductsRepository') // private productsRepository: IProductsRepository, // @inject('CustomersRepository') // private customersRepository: ICustomersRepository,
+    private ordersRepository: IOrdersRepository,
   ) {}
 
   public async execute({ id }: IRequest): Promise<Order | undefined> {

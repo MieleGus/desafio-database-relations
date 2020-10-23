@@ -16,10 +16,12 @@ class OrdersProducts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  // vários order_products podem ser de um pedido (será o contrário do que está na entity Order)
   @ManyToOne(() => Order, order => order.order_products)
-  @JoinColumn({ name: 'product_id' })
+  @JoinColumn({ name: 'order_id' })
   order: Order;
 
+  // vários order_products podem ser de um produto
   @ManyToOne(() => Product, product => product.order_products)
   @JoinColumn({ name: 'product_id' })
   product: Product;
